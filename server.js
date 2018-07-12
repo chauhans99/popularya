@@ -49,13 +49,21 @@ MongoClient.connect('mongodb://chauhan:testing1@ds131551.mlab.com:31551/populary
     });
   })
 
-	app.listen(3000, function(){  // otherwise start server on port 3000
-		console.log('listening on port 3000')
-	})
+	// app.listen(3000, function(){  // otherwise start server on port 3000
+	// 	console.log('listening on port 3000')
+	// })
+
+  var server = app.listen(process.env.PORT || 3000, function () {
+  var port = server.address().port;
+  console.log("App now running on port", port);
+  });
 
 })
 
-
+function handleError(res, reason, message, code) {
+  console.log("ERROR: " + reason);
+  res.status(code || 500).json({"error": message});
+}
 
 
 
